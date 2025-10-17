@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "RPKI & DNSSEC Checker",
+  "version": "1.1",
+  "description": "Check if the current website is protected by RPKI and signed with DNSSEC",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "rpki-dnssec-checker@example.com",
+      "strict_min_version": "109.0"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://rpki.cloudflare.com/*",
+    "https://dns.google/*",
+    "https://ipinfo.io/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "RPKI & DNSSEC Checker"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'none'; style-src 'self'; connect-src 'self' https://rpki.cloudflare.com https://dns.google https://ipinfo.io; img-src 'self' data:; font-src 'self'; frame-src 'none'"
+}

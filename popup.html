@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <h1 class="title">RPKI & DNSSEC Checker</h1>
+    <p class="subtitle">Check if this website is protected by RPKI and DNSSEC</p>
+  </div>
+
+  <!-- Settings Section - Now at top -->
+  <div class="settings-controls">
+    <button id="showSettings" class="settings-link">⚙️ Settings</button>
+  </div>
+
+  <div class="settings-section settings-section-hidden" id="settingsSection">
+    <div class="settings-header">
+      <h3>Cache Settings</h3>
+      <button id="toggleSettings" class="settings-toggle">Hide</button>
+    </div>
+
+    <div class="cache-info" id="cacheInfo">
+      <div class="info-row">
+        <span class="info-label">Cache Status:</span>
+        <span id="cacheStatus">Loading...</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Last Updated:</span>
+        <span id="cacheLastUpdated">Never</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Data Size:</span>
+        <span id="cacheDataSize">0 entries</span>
+      </div>
+    </div>
+
+    <div class="cache-controls">
+      <div class="control-group">
+        <label for="cacheTimeout">Cache Timeout (hours):</label>
+        <input type="number" id="cacheTimeout" min="1" max="96" value="12" step="1">
+        <button id="updateTimeout" class="btn-secondary">Update</button>
+      </div>
+
+      <div class="control-group">
+        <button id="flushCache" class="btn-danger">Flush Cache</button>
+        <span id="flushStatus" class="status-message"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Status Section -->
+  <div class="status-section status-loading" id="statusSection">
+    <div class="status-icon">
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="status-text">Checking RPKI & DNSSEC</div>
+    <div class="status-details">Please wait while we verify RPKI and DNSSEC protection...</div>
+  </div>
+
+  <!-- Report Section - Below summary -->
+  <div class="report-section report-section-hidden" id="reportSection">
+    <div class="report-header">
+      <span class="report-icon">⚠️</span>
+      <span class="report-text">Missing Security Protection</span>
+    </div>
+    <div class="report-details" id="reportDetails"></div>
+    <button id="reportButton" class="report-btn">
+      📋 Copy Security Report
+    </button>
+  </div>
+
+  <!-- Detailed Information Sections -->
+  <div class="info-section">
+    <div class="info-label">Current Website</div>
+    <div class="info-value" id="currentUrl">Loading...</div>
+  </div>
+
+  <div class="info-section">
+    <div class="info-label">IP Addresses</div>
+    <div class="info-value">
+      <div id="ipv4Address">IPv4: Resolving...</div>
+      <div id="ipv6Address" class="ipv6-address-hidden">IPv6: Not found</div>
+    </div>
+  </div>
+
+  <div class="info-section hidden" id="networkDetails">
+    <div class="info-label">Network Information</div>
+    <div class="info-value">
+      <div id="asnInfo"></div>
+      <div id="organizationInfo"></div>
+      <div id="locationInfo"></div>
+    </div>
+  </div>
+
+  <div class="info-section hidden" id="rpkiDetails">
+    <div class="info-label">RPKI Details</div>
+    <div class="info-value">
+      <div id="prefixInfo"></div>
+      <div id="rpkiAsnInfo"></div>
+    </div>
+  </div>
+
+  <div class="info-section hidden" id="dnssecDetails">
+    <div class="info-label">DNSSEC Details</div>
+    <div class="info-value">
+      <div id="dnssecStatusInfo"></div>
+      <div id="dnssecAuthInfo"></div>
+    </div>
+  </div>
+
+
+  <script src="popup.js"></script>
+</body>
+</html>
